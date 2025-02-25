@@ -1,8 +1,5 @@
 # .goreleaser.yaml
 project_name: test-sbom
-source:
-  enabled: false
-  
 builds:
   - id: test-app
     main: ./main.go
