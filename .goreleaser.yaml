@@ -20,7 +20,10 @@ release:
 
 # Simple SBOM configuration
 sboms:
-- artifacts: any
+  - artifacts: source
+  - artifacts: binary
+    documents:
+      - "{{ .Binary }}_{{ .Os }}_{{ .Arch }}.sbom"
 
 signs:
 - cmd: cosign
