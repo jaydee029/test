@@ -21,7 +21,8 @@ release:
 # Simple SBOM configuration
 sboms:
   - artifacts: source
-  - artifacts: binary
+  - id: binary
+    artifacts: binary
     documents:
       - "{{ .Binary }}_{{ .Os }}_{{ .Arch }}.sbom"
 
