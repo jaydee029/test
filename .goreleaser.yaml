@@ -1,5 +1,5 @@
 # .goreleaser.yaml
-project_name: test-sbom
+project_name: test
 builds:
   - id: test-app
     main: ./main.go
@@ -8,7 +8,6 @@ builds:
       - linux
     goarch:
       - amd64
-      - arm64
     env:
       - CGO_ENABLED=0
 
@@ -18,13 +17,14 @@ release:
   mode: keep-existing
   #skip_upload: true  # Keep this as true
 
-# Simple SBOM configuration
-# sboms:
-#   - artifacts: source
-#   - id: binary
-#     artifacts: binary
-#     documents:
-#       - "{{ .Binary }}_{{ .Os }}_{{ .Arch }}.sbom"
+#Simple SBOM configuration
+sboms:
+  - id: source
+    artifacts: source
+  - id: binary
+    artifacts: binary
+    documents:
+      - "{{ .Binary }}_{{ .Os }}_{{ .Arch }}.sbom"
 
 # signs:
 # - cmd: cosign
