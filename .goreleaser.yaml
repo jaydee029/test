@@ -16,7 +16,7 @@ release:
   draft: false
   prerelease: auto
   mode: keep-existing
-  skip_upload: true  # Keep this as true
+  #skip_upload: true  # Keep this as true
 
 # Simple SBOM configuration
 sboms:
@@ -24,3 +24,16 @@ sboms:
     artifacts: source
   - id: archive
     artifacts: archive
+
+signs:
+- cmd: cosign
+  # env:
+  # - COSIGN_EXPERIMENTAL=1
+  certificate: '${artifact}.pem'
+  args:
+    - sign-blob
+    - '--output-certificate=${certificate}'
+    - '--output-signature=${signature}'
+    - '${artifact}'
+  artifacts: checksum
+  output: true
