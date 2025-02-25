@@ -21,21 +21,23 @@ release:
 sboms:
   - id: source
     artifacts: source
+    documents:
+      - "{{ .ProjectName }}_{{ .Version }}_source.sbom"
   - id: binary
     artifacts: binary
     documents:
       - "{{ .Binary }}_{{ .Os }}_{{ .Arch }}.sbom"
 
-# signs:
-# - cmd: cosign
-#   env:
-#   - COSIGN_EXPERIMENTAL=1
-#   certificate: '${artifact}.pem'
-#   args:
-#     - sign-blob
-#     - '--yes'
-#     - '--output-certificate=${certificate}'
-#     - '--output-signature=${signature}'
-#     - '${artifact}'
-#   artifacts: all
-#   output: true
+signs:
+- cmd: cosign
+  env:
+  - COSIGN_EXPERIMENTAL=1
+  certificate: '${artifact}.pem'
+  args:
+    - sign-blob
+    - '--yes'
+    - '--output-certificate=${certificate}'
+    - '--output-signature=${signature}'
+    - '${artifact}'
+  artifacts: all
+  output: true
