@@ -27,8 +27,8 @@ sboms:
 
 signs:
 - cmd: cosign
-  # env:
-  # - COSIGN_EXPERIMENTAL=1
+  env:
+  - COSIGN_EXPERIMENTAL=1
   certificate: '${artifact}.pem'
   args:
     - sign-blob
